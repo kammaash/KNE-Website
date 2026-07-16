@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Montessori Indus Residential School | Montessori Group</title>
+<meta name="description" content="Montessori Indus — the founding residential school of the Montessori Group, Kurnool. Home of the MINDS IIT/NEET competitive track.">
+<link rel="icon" type="image/png" href="assets/group-logo.png">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Hanken+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:#ffffff;color:#26201d;font-family:"Hanken Grotesk",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  ::selection{background:#a51915;color:#fff}
+  img{display:block;max-width:100%}
+  @keyframes riseIn{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+</style>
+<script src="cursor.js"></script>
+</helmet>
+
+<div style="max-width:100%;overflow:hidden">
+
+<!-- NAV -->
+<header ref="{{ navRef }}" style="position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(12px);border-bottom:1px solid rgba(38,32,29,.1);transition:box-shadow .3s ease">
+  <nav style="max-width:1240px;margin:0 auto;padding:13px 32px;display:flex;align-items:center;justify-content:space-between;gap:20px">
+    <a href="index.html" style="display:flex;align-items:center;gap:12px">
+      <img src="assets/group-logo.png" alt="Montessori Group" style="height:40px;width:auto">
+      <span style="display:flex;flex-direction:column;line-height:1.05">
+        <span style="font-family:'Cormorant Garamond',serif;font-weight:700;font-size:19px">Montessori Indus</span>
+        <span style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:#a51915;margin-top:3px">Residential School · Est. 1991</span>
+      </span>
+    </a>
+    <div style="display:flex;align-items:center;gap:22px;font-size:14px;font-weight:500">
+      <a href="index.html" style="opacity:.8" style-hover="opacity:1">← Group</a>
+      <a href="#minds" style="opacity:.8" style-hover="opacity:1">MINDS Program</a>
+      <a href="monte-international.html" style="opacity:.8" style-hover="opacity:1">Monté</a>
+      <a href="#admissions" style="background:#a51915;color:#fff;padding:10px 20px;border-radius:999px;font-weight:600" style-hover="background:#7f120f">Apply</a>
+    </div>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section style="background:#a51915;color:#fff;position:relative;overflow:hidden">
+  <div style="position:absolute;inset:0;background:radial-gradient(120% 90% at 85% 10%,rgba(232,84,27,.55),transparent 60%)"></div>
+  <div style="max-width:1240px;margin:0 auto;padding:84px 32px;display:grid;grid-template-columns:1.1fr .9fr;gap:52px;align-items:center;position:relative">
+    <div>
+      <div style="font-family:'Space Mono',monospace;font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;color:#ffd9c4;animation:fadeIn .8s ease both">The Original · The Flagship</div>
+      <h1 style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:66px;line-height:1.02;margin:16px 0 0;animation:riseIn .9s ease both">Where the Montessori<br>journey began.</h1>
+      <p style="max-width:500px;font-size:18px;line-height:1.62;color:#f4ddd2;margin:22px 0 0;animation:riseIn .9s ease .1s both">The founding residential campus of the group — a large green estate on NH-44 where the renowned Montessori method meets every amenity a full childhood needs, from smart labs to secure hostels.</p>
+      <div style="display:flex;gap:26px;margin-top:34px;animation:riseIn .9s ease .2s both">
+        <sc-for list="{{ heroStats }}" as="h" hint-placeholder-count="3">
+          <div>
+            <div style="font-family:'Cormorant Garamond',serif;font-weight:700;font-size:34px;line-height:1;color:#fff">{{ h.n }}</div>
+            <div style="font-size:12px;color:#f0cdbf;margin-top:4px">{{ h.label }}</div>
+          </div>
+        </sc-for>
+      </div>
+      <div style="margin-top:34px;animation:riseIn .9s ease .3s both">
+        <a href="#admissions" style="background:#fff;color:#a51915;padding:14px 28px;border-radius:999px;font-weight:700;font-size:15px" style-hover="background:#ffd9c4">Enquire about admission →</a>
+      </div>
+    </div>
+    <div style="aspect-ratio:4/5;border-radius:16px;overflow:hidden;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);display:flex;align-items:flex-end;padding:20px;animation:fadeIn 1s ease both">
+      <span style="font-family:'Space Mono',monospace;font-size:11px;color:#fff;background:rgba(0,0,0,.25);padding:6px 11px;border-radius:6px">indus campus — hero photo</span>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section style="max-width:1240px;margin:0 auto;padding:80px 32px;display:grid;grid-template-columns:.9fr 1.1fr;gap:56px">
+  <div>
+    <div style="font-family:'Space Mono',monospace;font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:#a51915">About the campus</div>
+    <h2 style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:42px;line-height:1.08;margin:14px 0 0">A home away from<br>home, since 1991.</h2>
+  </div>
+  <div>
+    <p style="font-size:17px;line-height:1.66;color:#4a423c;margin:0">Set on a 30-acre green estate, Montessori Indus is a fully residential school affiliated to CBSE. It embraces the Montessori teaching method — a student-centric approach that fosters independence, critical thinking and a love for exploration.</p>
+    <p style="font-size:17px;line-height:1.66;color:#4a423c;margin:18px 0 0">With separate secure hostels for boys and girls, dedicated science labs, a well-stocked library, a swimming pool and expansive playgrounds, day-to-day life balances rigorous academics with sport, music and the arts.</p>
+  </div>
+</section>
+
+<!-- PROGRAMS -->
+<section style="background:#fbf3f2;border-top:1px solid rgba(38,32,29,.07);border-bottom:1px solid rgba(38,32,29,.07)">
+  <div style="max-width:1240px;margin:0 auto;padding:76px 32px">
+    <h2 style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:40px;line-height:1.06;margin:0 0 34px">Life at Indus</h2>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px">
+      <sc-for list="{{ programs }}" as="p" hint-placeholder-count="6">
+        <div data-reveal style="opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s ease;background:#fff;border:1px solid rgba(38,32,29,.1);border-radius:14px;padding:26px 24px">
+          <div style="width:40px;height:3px;background:#a51915;border-radius:2px"></div>
+          <h4 style="font-family:'Cormorant Garamond',serif;font-weight:700;font-size:22px;margin:16px 0 0">{{ p.title }}</h4>
+          <p style="font-size:14px;line-height:1.55;color:#6b615b;margin:8px 0 0">{{ p.desc }}</p>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<!-- MINDS PROGRAM (part of Indus) -->
+<section id="minds" style="background:#161210;color:#f4efe9;position:relative;overflow:hidden;scroll-margin-top:64px">
+  <div style="position:absolute;inset:0;background:radial-gradient(90% 80% at 82% 0%,rgba(211,36,31,.32),transparent 55%),radial-gradient(70% 60% at 8% 100%,rgba(232,84,27,.16),transparent 60%)"></div>
+  <div style="max-width:1240px;margin:0 auto;padding:84px 32px;position:relative">
+    <div style="display:grid;grid-template-columns:.95fr 1.05fr;gap:52px;align-items:center">
+      <div>
+        <div style="display:inline-flex;align-items:center;gap:9px;font-family:'Space Mono',monospace;font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;color:#f0a488"><span style="width:8px;height:8px;border-radius:50%;background:#d3241f;display:inline-block"></span>MINDS · Elite Competitive Track</div>
+        <h2 style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:52px;line-height:1.03;margin:16px 0 0;color:#fff">Engineered for<br>the <em style="font-style:italic;color:#e8724f">top</em>.</h2>
+        <p style="max-width:500px;font-size:17px;line-height:1.64;color:#cfc6bd;margin:20px 0 0">Montessori Indus Network for Dynamic Students — the upgraded, top-tier 11th &amp; 12th track within Indus, equipped with the latest amenities and built to bridge school with national competitive exams.</p>
+        <p style="max-width:500px;font-size:17px;line-height:1.64;color:#cfc6bd;margin:16px 0 0">Operating on a philosophy of "differentiated schooling," MINDS groups students by learning capacity and problem-solving speed rather than a rigid uniform standard — prioritising deep conceptual logic, analytical thinking and multi-disciplinary application over memorisation.</p>
+        <p style="max-width:500px;font-size:17px;line-height:1.64;color:#cfc6bd;margin:16px 0 0">Run in collaboration with national bodies like Aakash Medical and IIT-JEE Foundations, the track is recognised across Rayalaseema for city-topping scores and placements into IITs, NITs and top medical colleges.</p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:18px">
+        <div style="display:flex;gap:26px">
+          <sc-for list="{{ mindsStats }}" as="h" hint-placeholder-count="3">
+            <div>
+              <div style="font-family:'Cormorant Garamond',serif;font-weight:700;font-size:32px;line-height:1;color:#e8724f">{{ h.n }}</div>
+              <div style="font-size:12px;color:#a89e94;margin-top:4px">{{ h.label }}</div>
+            </div>
+          </sc-for>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:6px">
+          <sc-for list="{{ mindsPrograms }}" as="p" hint-placeholder-count="6">
+            <div data-reveal style="opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s ease;background:#221c18;border:1px solid rgba(255,255,255,.09);border-radius:14px;padding:20px 20px">
+              <div style="width:36px;height:3px;background:#d3241f;border-radius:2px"></div>
+              <h4 style="font-family:'Cormorant Garamond',serif;font-weight:700;font-size:19px;margin:12px 0 0;color:#fff">{{ p.title }}</h4>
+              <p style="font-size:13px;line-height:1.5;color:#a89e94;margin:6px 0 0">{{ p.desc }}</p>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:52px;padding-top:38px;border-top:1px solid rgba(255,255,255,.12)">
+      <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:16px;margin-bottom:26px">
+        <h3 style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:32px;margin:0;color:#fff">A proven track record</h3>
+        <p style="max-width:360px;font-size:14px;line-height:1.6;color:#a89e94">City-topping scores year after year, and admissions into the country's most competitive institutes.</p>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:18px">
+        <sc-for list="{{ mindsResults }}" as="r" hint-placeholder-count="4">
+          <div data-reveal style="opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s ease;border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:24px 22px;background:rgba(255,255,255,.03)">
+            <div style="font-family:'Cormorant Garamond',serif;font-weight:700;font-size:40px;line-height:1;color:#e8724f">{{ r.n }}</div>
+            <div style="font-size:13px;color:#a89e94;margin-top:8px;line-height:1.45">{{ r.label }}</div>
+          </div>
+        </sc-for>
+      </div>
+      <p style="font-size:14px;line-height:1.6;color:#a89e94;margin:26px 0 0;max-width:640px">The MINDS track begins with a school-specific entrance examination assessing mathematical, analytical and logical reasoning, across MPC (IIT-JEE focus) and BiPC (NEET focus) streams. Mention MINDS in the enquiry form below to register interest.</p>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section style="max-width:1240px;margin:0 auto;padding:78px 32px">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:12px;margin-bottom:26px">
+    <h2 style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:40px;margin:0">Campus gallery</h2>
+    <span style="font-family:'Space Mono',monospace;font-size:12px;color:#a51915;letter-spacing:.04em">photos coming soon</span>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px">
+    <div style="grid-column:span 2;aspect-ratio:16/10;border-radius:12px;background:repeating-linear-gradient(45deg,#f1e6e4 0 14px,#eaddd9 14px 28px);border:1px solid rgba(38,32,29,.08)"></div>
+    <div style="aspect-ratio:1;border-radius:12px;background:repeating-linear-gradient(45deg,#f1e6e4 0 12px,#eaddd9 12px 24px);border:1px solid rgba(38,32,29,.08)"></div>
+    <div style="aspect-ratio:1;border-radius:12px;background:repeating-linear-gradient(45deg,#f1e6e4 0 12px,#eaddd9 12px 24px);border:1px solid rgba(38,32,29,.08)"></div>
+    <div style="aspect-ratio:1;border-radius:12px;background:repeating-linear-gradient(45deg,#f1e6e4 0 12px,#eaddd9 12px 24px);border:1px solid rgba(38,32,29,.08)"></div>
+    <div style="aspect-ratio:1;border-radius:12px;background:repeating-linear-gradient(45deg,#f1e6e4 0 12px,#eaddd9 12px 24px);border:1px solid rgba(38,32,29,.08)"></div>
+    <div style="grid-column:span 2;aspect-ratio:16/10;border-radius:12px;background:repeating-linear-gradient(45deg,#f1e6e4 0 14px,#eaddd9 14px 28px);border:1px solid rgba(38,32,29,.08)"></div>
+  </div>
+</section>
+
+<!-- ADMISSIONS -->
+<section id="admissions" style="background:#2c1210;color:#fff">
+  <div style="max-width:1240px;margin:0 auto;padding:80px 32px;display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center">
+    <div>
+      <div style="font-family:'Space Mono',monospace;font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:#ffb59a">Admissions 2026–27</div>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:44px;line-height:1.05;margin:14px 0 0">Join the Indus family.</h2>
+      <p style="font-size:16px;line-height:1.62;color:#e6cfc6;margin:18px 0 0;max-width:430px">Boarding admissions are open across primary, secondary and senior classes. Share your details and our team will guide you through the entrance assessment and enrolment.</p>
+    </div>
+    <div style="background:#fff;color:#26201d;border:1px solid rgba(255,255,255,.14);border-radius:16px;padding:28px">
+      <div style="font-family:'Cormorant Garamond',serif;font-weight:700;font-size:22px;margin-bottom:16px">Enquire now</div>
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <input value="{{ form.name }}" onInput="{{ onName }}" placeholder="Parent / student name" style="width:100%;padding:13px 15px;border:1px solid rgba(38,32,29,.18);border-radius:10px;font-family:inherit;font-size:14.5px;background:#fff;color:#26201d;outline:none">
+        <input value="{{ form.phone }}" onInput="{{ onPhone }}" placeholder="Phone number" style="width:100%;padding:13px 15px;border:1px solid rgba(38,32,29,.18);border-radius:10px;font-family:inherit;font-size:14.5px;background:#fff;color:#26201d;outline:none">
+        <input value="{{ form.grade }}" onInput="{{ onGrade }}" placeholder="Class / grade of interest" style="width:100%;padding:13px 15px;border:1px solid rgba(38,32,29,.18);border-radius:10px;font-family:inherit;font-size:14.5px;background:#fff;color:#26201d;outline:none">
+        <button onClick="{{ submit }}" style="width:100%;padding:14px;border:none;border-radius:10px;background:#a51915;color:#fff;font-family:inherit;font-weight:600;font-size:15px;cursor:pointer" style-hover="background:#7f120f">{{ submitLabel }}</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer style="background:#1c1714;color:#c9c1ba">
+  <div style="max-width:1240px;margin:0 auto;padding:52px 32px 30px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:24px;align-items:center">
+    <a href="index.html" style="display:flex;align-items:center;gap:12px">
+      <img src="assets/group-logo.png" alt="Montessori Group" style="height:40px;width:auto">
+      <span style="font-family:'Cormorant Garamond',serif;font-weight:700;font-size:19px;color:#fff">Montessori Group</span>
+    </a>
+    <div style="display:flex;gap:22px;font-size:14px">
+      <a href="index.html" style-hover="color:#fff">Group home</a>
+      <a href="#minds" style-hover="color:#fff">MINDS Program</a>
+      <a href="monte-international.html" style-hover="color:#fff">Monté</a>
+    </div>
+    <span style="font-size:12.5px;color:#8a7d75;font-family:'Space Mono',monospace">NH-44, Pandipadu, Kurnool</span>
+  </div>
+</footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { form: { name: "", phone: "", grade: "" }, submitted: false };
+
+  componentDidMount() {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          const el = e.target;
+          const sibs = Array.from(el.parentElement ? el.parentElement.querySelectorAll(":scope > [data-reveal]") : [el]);
+          el.style.transitionDelay = (Math.max(0, sibs.indexOf(el)) * 80) + "ms";
+          el.style.opacity = "1"; el.style.transform = "translateY(0)";
+          io.unobserve(el);
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll("[data-reveal]").forEach((el) => io.observe(el));
+    this._io = io;
+    const nav = this._navEl;
+    if (nav) { this._onScroll = () => { nav.style.boxShadow = window.scrollY > 12 ? "0 8px 30px rgba(38,32,29,.09)" : "none"; }; window.addEventListener("scroll", this._onScroll, { passive: true }); }
+  }
+  componentWillUnmount() { if (this._io) this._io.disconnect(); if (this._onScroll) window.removeEventListener("scroll", this._onScroll); }
+
+  renderVals() {
+    const set = (k) => (e) => this.setState({ form: { ...this.state.form, [k]: e.target.value } });
+    return {
+      navRef: (el) => { this._navEl = el; },
+      heroStats: [ { n: "30-acre", label: "Green campus" }, { n: "880+", label: "Boarders" }, { n: "CBSE", label: "Affiliation" } ],
+      mindsStats: [ { n: "IIT-JEE", label: "+ NEET focus" }, { n: "Class 11–12", label: "MPC · BiPC" }, { n: "NTA", label: "Mock frameworks" } ],
+      mindsPrograms: [
+        { title: "Differentiated Speed Tracks", desc: "Students grouped by capacity and problem-solving pace, not a rigid uniform standard." },
+        { title: "Integrated Coaching", desc: "Specialised modules with Aakash Medical and IIT-JEE Foundations, aligned to live exam patterns." },
+        { title: "NTA-Pattern Testing", desc: "Frequent, timed assessments modelled on the National Testing Agency's computer-based format." },
+        { title: "Detailed Analytics", desc: "Performance tracked to surface weak chapters, concept gaps and time-management issues early." },
+        { title: "Modern Science Labs", desc: "Premium, updated labs for hands-on work reinforcing physics and chemistry modules." },
+        { title: "Balanced Well-being", desc: "Mandatory sport and green campus life to manage burnout through a demanding curriculum." },
+      ],
+      mindsResults: [
+        { n: "IITs", label: "Selections into the IITs" },
+        { n: "NITs", label: "Placements into NITs" },
+        { n: "NEET", label: "Medical-college admissions" },
+        { n: "50 yrs", label: "Of city-topping results" },
+      ],
+      programs: [
+        { title: "Montessori Pedagogy", desc: "A student-centric method building independence, curiosity and critical thinking from the earliest years." },
+        { title: "Residential Boarding", desc: "Separate, highly secure boys' and girls' hostels with warm, structured daily routines." },
+        { title: "Smart Classrooms & Labs", desc: "Audio-visual smart classes and dedicated science labs for hands-on learning." },
+        { title: "Sports & Swimming", desc: "Expansive playgrounds, a swimming pool and daily physical education for every child." },
+        { title: "Arts & Culture", desc: "Music, dance, art clubs and exhibitions that nurture talent and teamwork." },
+        { title: "Care & Well-being", desc: "On-campus infirmary and a scholar's mess keeping students healthy and at home." },
+      ],
+      form: this.state.form,
+      onName: set("name"), onPhone: set("phone"), onGrade: set("grade"),
+      submitLabel: this.state.submitted ? "✓ Enquiry received" : "Send enquiry",
+      submit: () => this.setState({ submitted: true }),
+    };
+  }
+}
+</script>
+</body>
+</html>
