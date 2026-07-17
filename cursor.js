@@ -1,6 +1,28 @@
 (function () {
   var NAVY = "#16294d";
+  var LIGHT_INK = "#f4f7ff";
   var current = null;
+
+  // Parse a computed background-color string into [r,g,b], or null if fully transparent.
+  function parseRGB(str) {
+    var m = str && str.match(/rgba?\(([^)]+)\)/);
+    if (!m) return null;
+    var p = m[1].split(",").map(function (s) { return parseFloat(s); });
+    if (p.length >= 4 && p[3] === 0) return null;
+    return p;
+  }
+
+  // Walk up from the element under (x,y) to the first opaque background and
+  // report whether it's a dark region (e.g. the navy sections) by luminance.
+  function isDarkAt(x, y) {
+    var el = document.elementFromPoint(x, y), depth = 0;
+    while (el && depth < 14) {
+      var rgb = parseRGB(getComputedStyle(el).backgroundColor);
+      if (rgb) return (0.299 * rgb[0] + 0.587 * rgb[1] + 0.114 * rgb[2]) < 120;
+      el = el.parentElement; depth++;
+    }
+    return false;
+  }
 
   function teardown() {
     if (current) {
@@ -17,7 +39,7 @@
 
   function apply(type) {
     teardown();
-    type = type || "Ring + dot";
+    type = type || "Pen (ink)";
     if (type === "Native" || (window.matchMedia && matchMedia("(pointer:coarse)").matches)) {
       document.body.style.cursor = "";
       return;
@@ -47,7 +69,7 @@
     document.addEventListener("pointerdown", onDown);
     document.addEventListener("pointerup", onUp);
 
-    var x = mx, y = my, rx = mx, ry = my, step, extraStyle = null;
+    var step, extraStyle = null;
 
     if (type === "Pen (ink)") {
       extraStyle = document.createElement("style");
@@ -59,11 +81,12 @@
       var svg = document.createElementNS(ns, "svg");
       svg.setAttribute("style", "position:absolute;inset:0;width:100%;height:100%;overflow:visible");
       root.appendChild(svg);
+      var inkColor = NAVY, onDark = false, darkAt = 0;
       var drawSeg = function (x1, y1, x2, y2) {
         var ln = document.createElementNS(ns, "line");
         ln.setAttribute("x1", x1); ln.setAttribute("y1", y1);
         ln.setAttribute("x2", x2); ln.setAttribute("y2", y2);
-        ln.setAttribute("stroke", NAVY);
+        ln.setAttribute("stroke", inkColor);
         ln.setAttribute("stroke-width", "2.6");
         ln.setAttribute("stroke-linecap", "round");
         ln.style.transition = "opacity 1.5s ease .6s";
@@ -97,12 +120,20 @@
       root.appendChild(pen);
       var penLast = null, writing = false;
       step = function () {
+        // Sample the region under the cursor (throttled) so ink/dot stay
+        // visible over dark navy sections by switching to a light ink.
+        if (performance.now() - darkAt > 90) {
+          darkAt = performance.now();
+          onDark = isDarkAt(mx, my);
+          inkColor = onDark ? LIGHT_INK : NAVY;
+        }
         var hov = hovering || nearInteractive();
         if (pressing && !writing && !onText && !hov) writing = true;
         if (!pressing) writing = false;
         if (hov && !writing) {
           setOverride(true); setNoSelect(false);
           pen.style.opacity = "0"; penLast = null;
+          dot.style.background = inkColor;
           dot.style.opacity = "1";
           dot.style.transform = "translate(" + mx + "px," + my + "px)";
           return;
@@ -129,38 +160,19 @@
           pen.style.filter = "drop-shadow(1px 2px 1px rgba(0,0,0,.22))";
         }
       };
-    } else if (type === "Soft glow") {
-      var halo = document.createElement("div");
-      halo.style.cssText = "position:absolute;top:0;left:0;width:130px;height:130px;margin:-65px 0 0 -65px;border-radius:50%;background:radial-gradient(circle,rgba(22,41,77,.2),transparent 68%);transition:transform .35s ease";
-      var gdot = document.createElement("div");
-      gdot.style.cssText = "position:absolute;top:0;left:0;width:24px;height:24px;margin:-12px 0 0 -12px;border-radius:50%;background:" + NAVY + ";mix-blend-mode:multiply;filter:blur(1px);transition:transform .18s ease";
-      root.append(halo, gdot);
-      step = function () {
-        x += (mx - x) * 0.5; y += (my - y) * 0.5;
-        rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12;
-        gdot.style.transform = "translate(" + x + "px," + y + "px) scale(" + (pressing ? 0.6 : hovering ? 1.5 : 1) + ")";
-        halo.style.transform = "translate(" + rx + "px," + ry + "px) scale(" + (hovering ? 1.5 : 1) + ")";
-      };
-    } else if (type === "Invert lens") {
-      var c = document.createElement("div");
-      c.style.cssText = "position:absolute;top:0;left:0;width:22px;height:22px;margin:-11px 0 0 -11px;border-radius:50%;background:#fff;mix-blend-mode:difference;transition:transform .28s cubic-bezier(.22,1,.36,1)";
-      root.append(c);
-      step = function () {
-        x += (mx - x) * 0.4; y += (my - y) * 0.4;
-        var s = pressing ? 0.6 : hovering ? 3.4 : 1;
-        c.style.transform = "translate(" + x + "px," + y + "px) scale(" + s + ")";
-      };
     } else {
-      var ring = document.createElement("div");
-      ring.style.cssText = "position:absolute;top:0;left:0;width:34px;height:34px;margin:-17px 0 0 -17px;border:1.5px solid " + NAVY + ";border-radius:50%;transition:background .25s ease";
-      var rdot = document.createElement("div");
-      rdot.style.cssText = "position:absolute;top:0;left:0;width:7px;height:7px;margin:-3.5px 0 0 -3.5px;background:" + NAVY + ";border-radius:50%";
-      root.append(ring, rdot);
+      // "Dot" — a single dot that tracks the pointer precisely, grows over
+      // interactive elements, and recolors to light ink over dark navy regions.
+      var dotCur = document.createElement("div");
+      dotCur.style.cssText = "position:absolute;top:0;left:0;width:10px;height:10px;margin:-5px 0 0 -5px;background:" + NAVY + ";border-radius:50%;transition:background .15s ease";
+      root.append(dotCur);
+      var dotDarkAt = 0;
       step = function () {
-        rx += (mx - rx) * 0.2; ry += (my - ry) * 0.2;
-        rdot.style.transform = "translate(" + mx + "px," + my + "px) scale(" + (hovering ? 0 : 1) + ")";
-        ring.style.transform = "translate(" + rx + "px," + ry + "px) scale(" + (pressing ? 0.8 : hovering ? 1.7 : 1) + ")";
-        ring.style.background = hovering ? "rgba(22,41,77,.1)" : "transparent";
+        if (performance.now() - dotDarkAt > 90) {
+          dotDarkAt = performance.now();
+          dotCur.style.background = isDarkAt(mx, my) ? LIGHT_INK : NAVY;
+        }
+        dotCur.style.transform = "translate(" + mx + "px," + my + "px) scale(" + (pressing ? 0.7 : hovering ? 1.9 : 1) + ")";
       };
     }
 
@@ -172,14 +184,21 @@
 
   window.MonteCursor = {
     apply: apply,
-    get: function () { try { return localStorage.getItem("monteCursor") || "Ring + dot"; } catch (e) { return "Ring + dot"; } },
+    get: function () {
+      try {
+        var v = localStorage.getItem("monteCursor");
+        // Only two styles remain (plus Native for touch); map anything else
+        // — including legacy "Ring + dot"/"Soft glow"/"Invert lens" — to default.
+        return (v === "Dot" || v === "Native") ? v : "Pen (ink)";
+      } catch (e) { return "Pen (ink)"; }
+    },
     set: function (type) { try { localStorage.setItem("monteCursor", type); } catch (e) {} apply(type); }
   };
 
   function boot() {
     apply(window.MonteCursor.get());
     window.addEventListener("storage", function (e) {
-      if (e.key === "monteCursor") apply(e.newValue || "Ring + dot");
+      if (e.key === "monteCursor") apply(e.newValue || "Pen (ink)");
     });
   }
   if (document.readyState !== "loading") boot();
